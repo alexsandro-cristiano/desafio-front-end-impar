@@ -1,12 +1,10 @@
-import { Header } from './components/Header'
-import { Search } from './components/Search'
 import { GlobalStyle } from './styles/GlobalStyles'
+import { Home } from './styles/Pages/Home'
 export function App() {
   return (
     <>
       <GlobalStyle />
-      <Header />
-      <Search />
+      <Home />
     </>
   )
 }

@@ -1,8 +1,9 @@
 import { Header } from './components/Header'
-import './styles/global.scss'
+import { GlobalStyle } from './styles/GlobalStyles'
 export function App() {
   return (
     <>
+      <GlobalStyle />
       <Header />
     </>
   )

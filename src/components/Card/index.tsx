@@ -1,4 +1,6 @@
 import DefaultImg from '../../assets/icon-hand.svg'
+import IconTrash from '../../assets/icon-trash.svg'
+import IconEdit from '../../assets/icon-edit.svg'
 import {
   CardContainer,
   Divider,
@@ -18,8 +20,16 @@ export function Card() {
         <Text>Lorem ipsum dolor, sit amet consectetur adipisicing elit.</Text>
       </WrapperContent>
       <WrapperControl>
-        <button>1</button>
-        <button>2</button>
+        <button>
+          <img src={IconTrash} alt="Icone de exclusão"></img>
+          Excluir
+        </button>
+        <Divider />
+
+        <button>
+          <img src={IconEdit} alt="Icone de exclusão"></img>
+          Editar
+        </button>
       </WrapperControl>
     </CardContainer>
   )

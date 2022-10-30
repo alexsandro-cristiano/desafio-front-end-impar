@@ -1,14 +1,32 @@
+import { useEffect, useState } from 'react'
 import { Header } from '../../components/Header'
 import { Search } from '../../components/Search'
 import { Buttom } from '../../components/Buttom'
-import { ContainerContent, WrapperCard } from './styles'
 import { Card } from '../../components/Card'
-import { useState } from 'react'
 
-import { results } from '../../api/dados.js'
+import { APIPokemon } from '../../api/api'
 
+import { ContainerContent, WrapperCard } from './styles'
+
+interface IPokemonsProps {
+  name: any
+  url: any
+}
 export function Home() {
-  const mock = [...results]
+  const [isLoading, setIsLoading] = useState(true)
+  const [pokemons, setPokemons] = useState<IPokemonsProps[]>([])
+
+  //Consumo da API Pokemon
+  const getPokemons = async () => {
+    await APIPokemon.get('').then(res => {
+      setPokemons(res.data.results)
+      setIsLoading(false)
+    })
+  }
+
+  useEffect(() => {
+    getPokemons()
+  }, [])
 
   return (
     <>
@@ -20,10 +38,13 @@ export function Home() {
           <Buttom text={'Novo Card'} />
         </div>
         <WrapperCard>
-          {mock.map(pokemon => {
-            console.log(pokemon.name)
-            return <Card name={pokemon.name} />
-          })}
+          {isLoading ? (
+            <span>Loading...</span>
+          ) : (
+            pokemons.map(pokemon => {
+              return <Card key={pokemon.name} name={pokemon.name} />
+            })
+          )}
         </WrapperCard>
       </ContainerContent>
     </>

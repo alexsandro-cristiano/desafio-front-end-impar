@@ -21,4 +21,10 @@ export const WrapperCard = styled.section`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-gap: 37px;
+
+  span {
+    text-align: left;
+    font-size: 16px;
+    font-weight: 600;
+  }
 `

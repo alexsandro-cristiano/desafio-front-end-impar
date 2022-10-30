@@ -1,6 +1,8 @@
+import { useState } from 'react'
 import DefaultImg from '../../assets/icon-hand.svg'
 import IconTrash from '../../assets/icon-trash.svg'
 import IconEdit from '../../assets/icon-edit.svg'
+import { APIPokemon } from '../../api/api'
 import {
   CardContainer,
   Divider,
@@ -10,16 +12,27 @@ import {
   WrapperControl
 } from './styles'
 
-interface ICard {
+interface ICardProps {
   name: string
 }
 
-export function Card({ name }: ICard) {
+export function Card({ name }: ICardProps) {
+  const [image, setImage] = useState('')
+
+  const getPokemonData = async () => {
+    const res = await APIPokemon.get(`${name}`)
+    setImage(res.data.sprites.other.home.front_default)
+  }
+
+  getPokemonData()
   return (
     <CardContainer>
       <WrapperContent>
         <ImgContainer>
-          <img src={DefaultImg} alt="imagem"></img>
+          <img
+            src={image ? image : DefaultImg}
+            alt={image ? name : 'image default'}
+          />
         </ImgContainer>
         <Divider />
         <Text>{name}</Text>
@@ -32,7 +45,7 @@ export function Card({ name }: ICard) {
         <Divider />
 
         <button>
-          <img src={IconEdit} alt="Icone de exclusão"></img>
+          <img src={IconEdit} alt="Icone de edição"></img>
           Editar
         </button>
       </WrapperControl>

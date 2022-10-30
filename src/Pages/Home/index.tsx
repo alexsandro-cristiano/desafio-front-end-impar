@@ -15,6 +15,12 @@ interface IPokemonsProps {
 export function Home() {
   const [isLoading, setIsLoading] = useState(true)
   const [pokemons, setPokemons] = useState<IPokemonsProps[]>([])
+  const [search, setSearch] = useState('')
+
+  const filteredPokemon =
+    search.length > 0
+      ? pokemons.filter(pkm => pkm['name'].includes(search.toLocaleLowerCase()))
+      : []
 
   //Consumo da API Pokemon
   const getPokemons = async () => {
@@ -31,7 +37,7 @@ export function Home() {
   return (
     <>
       <Header />
-      <Search />
+      <Search setSearch={setSearch} />
       <ContainerContent>
         <div>
           <h2>Resultado da busca</h2>
@@ -40,9 +46,13 @@ export function Home() {
         <WrapperCard>
           {isLoading ? (
             <span>Loading...</span>
+          ) : search.length > 0 ? (
+            filteredPokemon.map(pkm => {
+              return <Card key={pkm.name} name={pkm.name} />
+            })
           ) : (
-            pokemons.map(pokemon => {
-              return <Card key={pokemon.name} name={pokemon.name} />
+            pokemons.map(pkm => {
+              return <Card key={pkm.name} name={pkm.name} />
             })
           )}
         </WrapperCard>

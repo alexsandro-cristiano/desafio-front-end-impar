@@ -14,27 +14,15 @@ export const ContainerContent = styled.main`
       color: #5f1478;
       font-weight: 400;
     }
-    button {
-      width: 173px;
-      height: 48px;
-
-      background: #e76316;
-      box-shadow: 0px 3px 6px #92207242;
-      border-radius: 8px;
-
-      color: #fff;
-      font-size: 18px;
-      font-weight: 700;
-      border: none;
-      &:hover {
-        cursor: pointer;
-      }
-    }
   }
 `
 export const WrapperCard = styled.section`
-  padding: 0.2rem 1rem;
+  margin-top: 32px;
   display: flex;
+  align-items: center;
+  justify-content: space-around;
   flex-wrap: wrap;
-  gap: 3.7rem;
+  gap: 37px;
+
+  flex: 1;
 `

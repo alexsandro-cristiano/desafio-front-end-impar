@@ -16,7 +16,7 @@ body,
 input,
 textarea,
 button {
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Muli', sans-serif;
 }
 h1,
 h2,

@@ -5,7 +5,6 @@ import fundoBusca from '../../assets/fundo-busca.png'
 export const Container = styled.div`
   width: 100%;
   height: 261px;
-
   background-image: url(${fundoBusca});
   background-repeat: no-repeat;
   background-size: cover;
@@ -18,12 +17,12 @@ export const WrapperSearch = styled.div`
   margin-top: 83px;
   width: 1046px;
   height: 76px;
-  background: #000;
   position: relative;
 
   display: flex;
   align-items: center;
   justify-content: center;
+
   input {
     width: 100%;
     height: 100%;
@@ -40,5 +39,13 @@ export const WrapperSearch = styled.div`
     &:hover::placeholder {
       color: #263238;
     }
+  }
+  img {
+    display: block;
+    width: 49px;
+    height: 49px;
+    position: absolute;
+    right: 25px;
+    pointer-events: none;
   }
 `

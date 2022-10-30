@@ -3,8 +3,13 @@ import { Search } from '../../components/Search'
 import { Buttom } from '../../components/Buttom'
 import { ContainerContent, WrapperCard } from './styles'
 import { Card } from '../../components/Card'
+import { useState } from 'react'
+
+import { results } from '../../api/dados.js'
 
 export function Home() {
+  const mock = [...results]
+
   return (
     <>
       <Header />
@@ -15,13 +20,10 @@ export function Home() {
           <Buttom text={'Novo Card'} />
         </div>
         <WrapperCard>
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
+          {mock.map(pokemon => {
+            console.log(pokemon.name)
+            return <Card name={pokemon.name} />
+          })}
         </WrapperCard>
       </ContainerContent>
     </>

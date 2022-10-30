@@ -9,7 +9,12 @@ import {
   WrapperContent,
   WrapperControl
 } from './styles'
-export function Card() {
+
+interface ICard {
+  name: string
+}
+
+export function Card({ name }: ICard) {
   return (
     <CardContainer>
       <WrapperContent>
@@ -17,7 +22,7 @@ export function Card() {
           <img src={DefaultImg} alt="imagem"></img>
         </ImgContainer>
         <Divider />
-        <Text>Lorem ipsum dolor, sit amet consectetur adipisicing elit.</Text>
+        <Text>{name}</Text>
       </WrapperContent>
       <WrapperControl>
         <button>

@@ -41,6 +41,7 @@ export const Text = styled.p`
   width: 191px;
   height: 40px;
   text-align: center;
+  text-transform: capitalize;
   font: normal normal normal 16px/20px Muli;
   color: #263238;
 `

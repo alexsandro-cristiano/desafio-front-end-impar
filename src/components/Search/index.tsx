@@ -1,5 +1,5 @@
 import LupaSvg from '../../assets/lupa.svg'
-import { Container, WrapperSearch } from './styled'
+import { Container, WrapperSearch } from './styles'
 
 export function Search() {
   return (

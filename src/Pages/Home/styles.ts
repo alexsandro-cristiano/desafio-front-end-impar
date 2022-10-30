@@ -18,11 +18,7 @@ export const ContainerContent = styled.main`
 `
 export const WrapperCard = styled.section`
   margin-top: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  flex-wrap: wrap;
-  gap: 37px;
-
-  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 37px;
 `

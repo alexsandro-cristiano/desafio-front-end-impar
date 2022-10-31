@@ -6,21 +6,19 @@ import { APIPokemon } from '../../api/api'
 import {
   CardContainer,
   Divider,
+  ErrorMessage,
   ImgContainer,
   Text,
   WrapperContent,
   WrapperControl
 } from './styles'
 
-interface ICardProps {
-  name: string
-}
-
-export function Card({ name }: ICardProps) {
+export function Card(props: any) {
   const [image, setImage] = useState('')
+  const [showError, setShowError] = useState(false)
 
   const getPokemonData = async () => {
-    const res = await APIPokemon.get(`${name}`)
+    const res = await APIPokemon.get(`${props.name}`)
     setImage(res.data.sprites.other.home.front_default)
   }
 
@@ -31,20 +29,25 @@ export function Card({ name }: ICardProps) {
         <ImgContainer>
           <img
             src={image ? image : DefaultImg}
-            alt={image ? name : 'image default'}
+            alt={image ? props.name : 'image default'}
           />
         </ImgContainer>
         <Divider />
-        <Text>{name}</Text>
+        <Text>{props.name}</Text>
       </WrapperContent>
+
+      {showError ? (
+        <ErrorMessage>Função ainda não implementada</ErrorMessage>
+      ) : null}
+
       <WrapperControl>
-        <button>
+        <button onClick={() => props.setActive(true)}>
           <img src={IconTrash} alt="Icone de exclusão"></img>
           Excluir
         </button>
         <Divider />
 
-        <button>
+        <button onClick={() => setShowError(!showError)}>
           <img src={IconEdit} alt="Icone de edição"></img>
           Editar
         </button>

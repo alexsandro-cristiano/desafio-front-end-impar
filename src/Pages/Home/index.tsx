@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { APIPokemon } from '../../api/api'
 import { Card } from '../../components/Card'
 import { Header } from '../../components/Header'
+import { Modal } from '../../components/Modal'
 import { Search } from '../../components/Search'
 import {
   Article,
@@ -16,6 +17,9 @@ interface IPokemonsProps {
   url: any
 }
 export function Home() {
+  const [showModal, setShowModal] = useState<boolean>(false)
+  const [modalSelector, setModalSelector] = useState<string>('')
+
   const [isLoading, setIsLoading] = useState(true)
   const [pokemons, setPokemons] = useState<IPokemonsProps[]>([])
   const [search, setSearch] = useState('')
@@ -26,6 +30,12 @@ export function Home() {
       ? pokemons.filter(pkm => pkm['name'].includes(search.toLocaleLowerCase()))
       : []
 
+  const handleCriarCardModal = () => {
+    setModalSelector('criar-card-modal')
+  }
+  const handleExcluirModal = () => {
+    setModalSelector('excluir-card-modal')
+  }
   //Consumo da API Pokemon
   const getPokemons = async () => {
     await APIPokemon.get('').then(res => {
@@ -54,24 +64,57 @@ export function Home() {
 
   return (
     <Container isModalOpen={false}>
+      {showModal && (
+        <Modal
+          setActive={setShowModal}
+          active={showModal}
+          type={modalSelector}
+        />
+      )}
+
       <Header />
       <Search setSearch={setSearch} />
 
       <Article>
         <SectionHeader>
           <h2>Resultado da busca</h2>
-          <button>Novo Card</button>
+          <button
+            onClick={() => {
+              handleCriarCardModal()
+              setShowModal(true)
+            }}
+          >
+            Novo Card
+          </button>
         </SectionHeader>
         <WrapperCard>
           {isLoading ? (
             <span>Loading...</span>
           ) : search.length > 0 ? (
             filteredPokemon.map(pkm => {
-              return <Card key={pkm.name} name={pkm.name} />
+              return (
+                <Card
+                  key={pkm.name}
+                  name={pkm.name}
+                  setActive={() => {
+                    handleExcluirModal()
+                    setShowModal(true)
+                  }}
+                />
+              )
             })
           ) : (
             pokemons.map(pkm => {
-              return <Card key={pkm.name} name={pkm.name} />
+              return (
+                <Card
+                  key={pkm.name}
+                  name={pkm.name}
+                  setActive={() => {
+                    handleExcluirModal()
+                    setShowModal(true)
+                  }}
+                />
+              )
             })
           )}
         </WrapperCard>

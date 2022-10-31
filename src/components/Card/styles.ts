@@ -83,3 +83,11 @@ export const WrapperControl = styled.div`
     }
   }
 `
+
+export const ErrorMessage = styled.h2`
+  position: absolute;
+  bottom: 50px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #e76316;
+`

@@ -16,6 +16,7 @@ export function Home() {
   const [isLoading, setIsLoading] = useState(true)
   const [pokemons, setPokemons] = useState<IPokemonsProps[]>([])
   const [search, setSearch] = useState('')
+  const [pagination, setPagination] = useState(0)
 
   const filteredPokemon =
     search.length > 0
@@ -25,8 +26,23 @@ export function Home() {
   //Consumo da API Pokemon
   const getPokemons = async () => {
     await APIPokemon.get('').then(res => {
+      console.log(res)
       setPokemons(res.data.results)
+      setPagination(20)
       setIsLoading(false)
+    })
+  }
+
+  const getMorePokemons = async () => {
+    await APIPokemon.get(`?offset=${pagination}&limit=20`).then(res => {
+      res.data.results.map((item: { name: any; url: any }) => {
+        const pkmTemp = {
+          name: item.name,
+          url: item.url
+        }
+        setPokemons(old => [...old, pkmTemp])
+      })
+      setPagination(old => old + 20)
     })
   }
 
@@ -56,6 +72,15 @@ export function Home() {
             })
           )}
         </WrapperCard>
+        <div className="btn">
+          <button
+            onClick={() => {
+              getMorePokemons()
+            }}
+          >
+            Ver +
+          </button>
+        </div>
       </ContainerContent>
     </>
   )

@@ -1,12 +1,15 @@
 import { useEffect, useState } from 'react'
+import { APIPokemon } from '../../api/api'
+import { Card } from '../../components/Card'
 import { Header } from '../../components/Header'
 import { Search } from '../../components/Search'
-import { Buttom } from '../../components/Buttom'
-import { Card } from '../../components/Card'
-
-import { APIPokemon } from '../../api/api'
-
-import { ContainerContent, WrapperCard } from './styles'
+import {
+  Article,
+  Container,
+  SectionFooter,
+  SectionHeader,
+  WrapperCard
+} from './styles'
 
 interface IPokemonsProps {
   name: any
@@ -32,7 +35,6 @@ export function Home() {
       setIsLoading(false)
     })
   }
-
   const getMorePokemons = async () => {
     await APIPokemon.get(`?offset=${pagination}&limit=20`).then(res => {
       res.data.results.map((item: { name: any; url: any }) => {
@@ -51,14 +53,15 @@ export function Home() {
   }, [])
 
   return (
-    <>
+    <Container isModalOpen={false}>
       <Header />
       <Search setSearch={setSearch} />
-      <ContainerContent>
-        <div>
+
+      <Article>
+        <SectionHeader>
           <h2>Resultado da busca</h2>
-          <Buttom text={'Novo Card'} />
-        </div>
+          <button>Novo Card</button>
+        </SectionHeader>
         <WrapperCard>
           {isLoading ? (
             <span>Loading...</span>
@@ -72,16 +75,20 @@ export function Home() {
             })
           )}
         </WrapperCard>
-        <div className="btn">
-          <button
-            onClick={() => {
-              getMorePokemons()
-            }}
-          >
-            Ver +
-          </button>
-        </div>
-      </ContainerContent>
-    </>
+        <SectionFooter>
+          {isLoading ? (
+            ''
+          ) : (
+            <button
+              onClick={() => {
+                getMorePokemons()
+              }}
+            >
+              Carregar Mais Pokemons
+            </button>
+          )}
+        </SectionFooter>
+      </Article>
+    </Container>
   )
 }

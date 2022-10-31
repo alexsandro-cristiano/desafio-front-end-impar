@@ -47,6 +47,9 @@ export const Text = styled.p`
 `
 
 export const WrapperControl = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
   width: 100%;
   height: 43px;
   box-shadow: inset 0px 3px 6px #0000000f;
@@ -56,16 +59,14 @@ export const WrapperControl = styled.div`
     width: 0;
     border: 1px solid #e4e4e4;
   }
-
   button {
+    border: none;
+    background: none;
+
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 12px;
-    width: 100%;
-    height: 100%;
-    border: none;
-    background: none;
     img {
       margin-bottom: 4px;
     }

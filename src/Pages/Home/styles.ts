@@ -1,54 +1,73 @@
 import styled from 'styled-components'
 
-export const ContainerContent = styled.main`
-  margin: 3.2rem auto;
-  width: 1056px;
+interface ContainerProps {
+  isModalOpen: boolean
+}
+export const Container = styled.div<ContainerProps>`
+  width: 100%;
+  height: ${props => (props.isModalOpen ? '100vh;' : '100%;')};
+  overflow: ${props => (props.isModalOpen ? 'hidden;' : 'auto;')};
+  padding-bottom: 50px;
+`
 
-  div {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+export const Article = styled.article`
+  margin: auto;
+  width: 75%;
+  height: 100%;
+`
+const SectionBase = styled.section`
+  margin: 32px auto;
+  display: flex;
 
-    h2 {
-      font-size: 32px;
-      color: #5f1478;
-      font-weight: 400;
+  button {
+    padding: 12px 40px;
+    color: #ffff;
+    font-weight: 800;
+    background: #e76316;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0px 3px 6px #92207242;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    :hover {
+      opacity: 0.9;
     }
-  }
-  .btn {
-    margin-top: 2rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    button {
-      width: 10rem;
-      height: 2.5rem;
-
-      background: #82cd47;
-      box-shadow: 0px 3px 6px #92207242;
-      border-radius: 8px;
-
-      color: #fff;
-      font-size: 18px;
-      font-weight: 700;
-      border: none;
-      transition: all 0.3s;
-      &:hover {
-        cursor: pointer;
-        background: #bce29e;
-      }
+    :active {
+      transform: scale(0.9);
     }
   }
 `
+export const SectionHeader = styled(SectionBase)`
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+
+  h2 {
+    font-size: 32px;
+    color: #5f1478;
+  }
+  button {
+    font-size: 18px;
+  }
+`
+
+export const SectionFooter = styled(SectionBase)`
+  justify-content: center;
+  button {
+    font-size: 16px;
+  }
+`
 export const WrapperCard = styled.section`
-  margin-top: 32px;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-gap: 37px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 37px;
 
   span {
-    text-align: left;
+    color: #5f1478;
     font-size: 16px;
-    font-weight: 600;
+    font-weight: 500;
+
+    margin: 50px 0;
   }
 `
